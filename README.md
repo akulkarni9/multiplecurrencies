@@ -6,4 +6,42 @@ There are certain prerequisites which should be satisfied before installing this
 
 Prerequisites:
 ==============
-Multiple currencies should be allowed in drop down box in magento header. There is a simple procedure for this. 
+1. Multiple currencies should be allowed in drop down box in magento header. There is a simple procedure for this. Go to System->Configuration. Select Currency Setup under General tab in left pane. Select any Base Currency and Default Display Currency. Under Allowed Currencies, select required currencies. 
+Note:
+=====
+Both Base Currency and Default Display Currency should be selected in Allowed Currencies. 
+After selecting multiple currencies, save it. 
+Now go to System->Manage Rates. If you have selected multiple currencies properly in previous step, then you should see a table which has Base currency and Allowed Currencies. Import webserviceex conversion values. Save it. 
+That wasn't difficult, was it? :) 
+
+2. Here is programatical way of adding multiple currencies to magento header. Oh, programs? Don't worry, it is simple. 
+Create a new template file in “YOUR_PACKAGE/YOUR_THEME/template/, name it as currency. Under that folder, create a new file, save it as currency.phtml. Put this code in that file.
+
+<?php if($this->getCurrencyCount() > 1): ?>
+<div class="form-language">
+    <label for="custom-currency-selector"><?php echo $this->__('Your Currency:') ?></label>
+    <select onchange="window.location.href=this.value" name="custom-currency-selector" id="custom-currency-selector">
+        <?php foreach ($this->getCurrencies() as $_code => $_name): ?>
+        <option value="<?php echo $this->getSwitchCurrencyUrl($_code)?>"
+            <?php if($_code == $this->getCurrentCurrencyCode()): ?>
+                selected="SELECTED"
+            <?php endif; ?>>
+            <?php echo $_code ?>
+        </option>
+        <?php endforeach; ?>
+    </select>
+</div>
+<?php endif; ?>
+
+Now we should tell Magento which template should be used for the selector. You should create “YOUR_PACKAGE/YOUR_THEME/layout/local.xml” and put this code in that file. 
+
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="header">
+            <block type="directory/currency" name="custom_currency_selector" template="currency/currency.phtml"/>
+        </reference>
+    </default>
+</layout>
+
+Refresh cache, reload magento front-end. check magento header in front end.
