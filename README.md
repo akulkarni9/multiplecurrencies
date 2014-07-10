@@ -32,6 +32,7 @@ Used in Product Listing: Yes,
 Used for sorting: Yes,  
 Give Lable as Price1. Save it.   
 Go to Manage Attribute Sets. Drag unorganised attributes into any sets. Preferably in Prices set. Save it. You should see those new attirbues in prices tab in manage products page in Backend now.  
+Set conversion rates in webserviceex to 1 for all products.
 
 That is all. Prerequisites are completed. Explore the files and understand the extension. 
 
