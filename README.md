@@ -19,4 +19,20 @@ Create a new template file in “YOUR_PACKAGE/YOUR_THEME/template/, name it as c
 
 Now we should tell Magento which template should be used for the selector. You should create “YOUR_PACKAGE/YOUR_THEME/layout/local.xml” and copy associated code from repository.
 
-Refresh cache, reload magento front-end. check magento header in front end.
+Refresh cache, reload magento front-end. check magento header in front end. You should see mutiple currencies in drop down box now.
+3. Go to catalog->Attribues->Manage Attributes. Create 2 new attributes, whose parameters should be  
+Attribute code: Any name that you want,  
+Unique Value: Yes,    
+Values Required: Yes,  
+Input Validation: None,  
+Apply to: All Products (This extension can support multiple products),  
+Comparable in front-end: Yes,  
+Visible on Product View page on front end: Yes,  
+Used in Product Listing: Yes,  
+Used for sorting: Yes,  
+Give Lable as Price1. Save it.   
+Go to Manage Attribute Sets. Drag unorganised attributes into any sets. Preferably in Prices set. Save it. You should see those new attirbues in prices tab in manage products page in Backend now.  
+
+That is all. Prerequisites are completed. Explore the files and understand the extension. 
+
+
