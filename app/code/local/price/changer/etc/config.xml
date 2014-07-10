@@ -1,0 +1,42 @@
+<?xml version="1.0"?>  
+<config>  
+	<modules>  
+		<price_changer>  
+			<version>0.1.0</version>  
+		</price_changer>  
+	</modules>  
+	<admin>  
+		<routers>  
+			<adminhtml>  
+				<args>  
+					<modules>  
+						<price_changer before="Mage_Adminhtml">price_changer</price_changer>  
+					</modules>  
+				</args>  
+			</adminhtml>  
+		</routers>  
+	</admin>  
+	<global>  
+		<models>  
+			<price_changer>  
+				<class>price_changer_Model</class>  
+			</price_changer>  
+			<catalog>  
+            	<rewrite>  
+                	<product>price_changer_Model_Catalog_Product</product>  
+            	</rewrite>  
+        	</catalog>  
+		</models>   
+		<events> 
+			<catalog_product_select_after>  
+				<observer>  
+					<price_changer>  
+						<class>price_changer/observer</class>  
+						<method>priceUpdate</method>  
+						<type>singleton</type>  
+					</price_changer>  
+				</observer>  
+			</catalog_product_select_after>  
+		</events>  
+	</global>  
+</config>  
